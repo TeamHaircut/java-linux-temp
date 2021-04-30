@@ -61,7 +61,7 @@ public class Main extends JPanel implements ActionListener, PropertyChangeListen
         progressBar.setValue(0);
         progressBar.setStringPainted(true);
  
-        taskOutput = new JTextArea(25, 20);//5,20
+        taskOutput = new JTextArea(10, 30);//5,20
         taskOutput.setMargin(new Insets(5,5,5,5));
         taskOutput.setEditable(false);
  
