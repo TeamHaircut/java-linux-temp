@@ -25,6 +25,25 @@ public class Main extends JPanel implements ActionListener, PropertyChangeListen
             int progress = 0;
             //Initialize progress property.
             setProgress(0);
+    		ProcessBuilder processBuilder = new ProcessBuilder();
+    		processBuilder.command("bash", "-c", "sh /root/Desktop/scriptA.sh");
+    		try {
+    			Process process = processBuilder.start();
+    			StringBuilder output = new StringBuilder();
+    			BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+    			String line;
+    			while(	(line=reader.readLine()) != null	) {
+    				output.append(line+"\n");
+    			}
+    			int exitVal = process.waitFor();
+    			if(exitVal == 0) {
+    				System.out.println("SUCCESS");
+    			} else {
+    				System.out.println("FAILED");
+    			}
+    		} catch (Exception e) {
+    			e.printStackTrace();
+    		}
             while (progress < 100) {
                 //Sleep for up to one second.
                 try {
@@ -71,9 +90,9 @@ public class Main extends JPanel implements ActionListener, PropertyChangeListen
         
         JScrollPane jScrollPane = new JScrollPane(taskOutput);
         jScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        //jScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
  
         add(panel, BorderLayout.PAGE_START);
-        //add(new JScrollPane(taskOutput), BorderLayout.CENTER);
         add(jScrollPane, BorderLayout.CENTER);
         setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
  
@@ -120,25 +139,25 @@ public class Main extends JPanel implements ActionListener, PropertyChangeListen
             }
         });
         
-		ProcessBuilder processBuilder = new ProcessBuilder();
-		processBuilder.command("bash", "-c", "sh /root/Desktop/scriptA.sh");
-		try {
-			Process process = processBuilder.start();
-			StringBuilder output = new StringBuilder();
-			BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-			String line;
-			while(	(line=reader.readLine()) != null	) {
-				output.append(line+"\n");
-			}
-			int exitVal = process.waitFor();
-			if(exitVal == 0) {
-				System.out.println("SUCCESS");
-			} else {
-				System.out.println("FAILED");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//		ProcessBuilder processBuilder = new ProcessBuilder();
+//		processBuilder.command("bash", "-c", "sh /root/Desktop/scriptA.sh");
+//		try {
+//			Process process = processBuilder.start();
+//			StringBuilder output = new StringBuilder();
+//			BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+//			String line;
+//			while(	(line=reader.readLine()) != null	) {
+//				output.append(line+"\n");
+//			}
+//			int exitVal = process.waitFor();
+//			if(exitVal == 0) {
+//				System.out.println("SUCCESS");
+//			} else {
+//				System.out.println("FAILED");
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 
 	}
 
