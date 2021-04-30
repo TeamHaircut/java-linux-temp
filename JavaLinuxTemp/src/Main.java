@@ -68,9 +68,13 @@ public class Main extends JPanel implements ActionListener, PropertyChangeListen
         JPanel panel = new JPanel();
         panel.add(startButton);
         panel.add(progressBar);
+        
+        JScrollPane jScrollPane = new JScrollPane(taskOutput);
+        jScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
  
         add(panel, BorderLayout.PAGE_START);
-        add(new JScrollPane(taskOutput), BorderLayout.CENTER);
+        //add(new JScrollPane(taskOutput), BorderLayout.CENTER);
+        add(jScrollPane, BorderLayout.CENTER);
         setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
  
     }
