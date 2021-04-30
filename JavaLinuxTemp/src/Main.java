@@ -61,7 +61,7 @@ public class Main extends JPanel implements ActionListener, PropertyChangeListen
         progressBar.setValue(0);
         progressBar.setStringPainted(true);
  
-        taskOutput = new JTextArea(5, 20);
+        taskOutput = new JTextArea(15, 25);//5,20
         taskOutput.setMargin(new Insets(5,5,5,5));
         taskOutput.setEditable(false);
  
@@ -96,7 +96,7 @@ public class Main extends JPanel implements ActionListener, PropertyChangeListen
 	
     private static void createAndShowGUI() {
         //Create and set up the window.
-        JFrame frame = new JFrame("SW Install Progress");
+        JFrame frame = new JFrame("SW Installer");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
  
         //Create and set up the content pane.
