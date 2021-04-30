@@ -25,37 +25,36 @@ public class Main extends JPanel implements ActionListener, PropertyChangeListen
             int progress = 0;
             //Initialize progress property.
             setProgress(0);
-            /////////////////////////////////////////////////////////////////////////////////////////////////
-    		ProcessBuilder processBuilder = new ProcessBuilder();
-    		processBuilder.command("bash", "-c", "sh /root/Desktop/scriptA.sh");
-    		try {
-    			Process process = processBuilder.start();
-    			StringBuilder output = new StringBuilder();
-    			BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-    			String line;
-    			System.out.println("HERE");
-    			//while(	(line=reader.readLine()) != null	) {
-    			//	output.append(line+"\n");
-    			//	System.out.println("HERE2");
-    			//}
-    			System.out.println(process.getInputStream());
-    			int exitVal = process.waitFor();
-    			if(exitVal == 0) {
-    				System.out.println("SUCCESS");
-    			} else {
-    				System.out.println("FAILED");
-    			}
-    		} catch (Exception e) {
-    			e.printStackTrace();
-    		}
-    		///////////////////////////////////////////////////////////////////////////////////////////////////
+
             while (progress < 100) {
                 //Sleep for up to one second.
                 try {
                     Thread.sleep(random.nextInt(1000));
                 } catch (InterruptedException ignore) {}
                 //Make random progress.
-                progress += random.nextInt(10);
+                /////////////////////////////////////////////////////////////////////////////////////////////////
+        		ProcessBuilder processBuilder = new ProcessBuilder();
+        		processBuilder.command("bash", "-c", "sh /root/Desktop/scriptA.sh");
+        		try {
+        			Process process = processBuilder.start();
+        			StringBuilder output = new StringBuilder();
+        			BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+        			String line;
+        			while(	(line=reader.readLine()) != null	) {
+        				output.append(line+"\n");
+        			}
+        			int exitVal = process.waitFor();
+        			if(exitVal == 0) {
+        				System.out.println("SUCCESS");
+        				progress += 1;
+        			} else {
+        				System.out.println("FAILED");
+        			}
+        		} catch (Exception e) {
+        			e.printStackTrace();
+        		}
+        		///////////////////////////////////////////////////////////////////////////////////////////////////
+                //progress += random.nextInt(10);
                 setProgress(Math.min(progress, 100));
             }
             return null;
