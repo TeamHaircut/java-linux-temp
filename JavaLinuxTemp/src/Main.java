@@ -1,19 +1,108 @@
 import javax.swing.*;
+
+import java.awt.*;
 import java.awt.event.*;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
+import java.beans.*;
+import java.util.Random;
 
-public class Main {
+public class Main extends JPanel implements ActionListener, PropertyChangeListener{
+	
+    private JProgressBar progressBar;
+    private JButton startButton;
+    private JTextArea taskOutput;
+    private Task task;
+    
+    class Task extends SwingWorker<Void, Void> {
+        /*
+         * Main task. Executed in background thread.
+         */
+        @Override
+        public Void doInBackground() {
+            Random random = new Random();
+            int progress = 0;
+            //Initialize progress property.
+            setProgress(0);
+            while (progress < 100) {
+                //Sleep for up to one second.
+                try {
+                    Thread.sleep(random.nextInt(1000));
+                } catch (InterruptedException ignore) {}
+                //Make random progress.
+                progress += random.nextInt(10);
+                setProgress(Math.min(progress, 100));
+            }
+            return null;
+        }
+ 
+        /*
+         * Executed in event dispatching thread
+         */
+        @Override
+        public void done() {
+            Toolkit.getDefaultToolkit().beep();
+            startButton.setEnabled(true);
+            setCursor(null); //turn off the wait cursor
+            taskOutput.append("Done!\n");
+        }
+    }
+	
+    public Main() {
+        super(new BorderLayout());
+ 
+        //Create the demo's UI.
+        startButton = new JButton("Start");
+        startButton.setActionCommand("start");
+        startButton.addActionListener(this);
+ 
+        progressBar = new JProgressBar(0, 100);
+        progressBar.setValue(0);
+        progressBar.setStringPainted(true);
+ 
+        taskOutput = new JTextArea(5, 20);
+        taskOutput.setMargin(new Insets(5,5,5,5));
+        taskOutput.setEditable(false);
+ 
+        JPanel panel = new JPanel();
+        panel.add(startButton);
+        panel.add(progressBar);
+ 
+        add(panel, BorderLayout.PAGE_START);
+        add(new JScrollPane(taskOutput), BorderLayout.CENTER);
+        setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+ 
+    }
+    
+    public void actionPerformed(ActionEvent evt) {
+        startButton.setEnabled(false);
+        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        //Instances of javax.swing.SwingWorker are not reusuable, so
+        //we create new instances as needed.
+        task = new Task();
+        task.addPropertyChangeListener(this);
+        task.execute();
+    }
+    
+    public void propertyChange(PropertyChangeEvent evt) {
+        if ("progress" == evt.getPropertyName()) {
+            int progress = (Integer) evt.getNewValue();
+            progressBar.setValue(progress);
+            taskOutput.append(String.format(
+                    "Completed %d%% of task.\n", task.getProgress()));
+        } 
+    } 
 	
     private static void createAndShowGUI() {
         //Create and set up the window.
-        JFrame frame = new JFrame("HelloWorldSwing");
+        JFrame frame = new JFrame("Installer App Progress");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
  
-        //Add the ubiquitous "Hello World" label.
-        JLabel label = new JLabel("Hello World");
-        frame.getContentPane().add(label);
+        //Create and set up the content pane.
+        JComponent newContentPane = new Main();
+        newContentPane.setOpaque(true); //content panes must be opaque
+        frame.setContentPane(newContentPane);
  
         //Display the window.
         frame.pack();
@@ -26,7 +115,7 @@ public class Main {
                 createAndShowGUI();
             }
         });
-		//temp
+        
 		ProcessBuilder processBuilder = new ProcessBuilder();
 		processBuilder.command("bash", "-c", "sh /root/Desktop/scriptA.sh");
 		try {
