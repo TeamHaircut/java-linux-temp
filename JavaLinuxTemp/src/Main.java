@@ -53,7 +53,7 @@ public class Main extends JPanel implements ActionListener, PropertyChangeListen
         super(new BorderLayout());
  
         //Create the demo's UI.
-        startButton = new JButton("Start");
+        startButton = new JButton("Install");
         startButton.setActionCommand("start");
         startButton.addActionListener(this);
  
@@ -96,7 +96,7 @@ public class Main extends JPanel implements ActionListener, PropertyChangeListen
 	
     private static void createAndShowGUI() {
         //Create and set up the window.
-        JFrame frame = new JFrame("Installer App Progress");
+        JFrame frame = new JFrame("SW Install Progress");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
  
         //Create and set up the content pane.
