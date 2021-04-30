@@ -33,9 +33,10 @@ public class Main extends JPanel implements ActionListener, PropertyChangeListen
     			StringBuilder output = new StringBuilder();
     			BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
     			String line;
+    			System.out.println("HERE");
     			while(	(line=reader.readLine()) != null	) {
     				output.append(line+"\n");
-    				System.out.println(line);
+    				System.out.println("HERE2");
     			}
     			int exitVal = process.waitFor();
     			if(exitVal == 0) {
