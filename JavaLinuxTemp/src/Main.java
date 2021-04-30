@@ -14,6 +14,7 @@ public class Main extends JPanel implements ActionListener, PropertyChangeListen
     private JButton startButton;
     private JTextArea taskOutput;
     private Task task;
+    String myLine = "start";
     
     class Task extends SwingWorker<Void, Void> {
         /*
@@ -23,6 +24,7 @@ public class Main extends JPanel implements ActionListener, PropertyChangeListen
         public Void doInBackground() {
             Random random = new Random();
             int progress = 0;
+            
             //Initialize progress property.
             setProgress(0);
 
@@ -40,13 +42,15 @@ public class Main extends JPanel implements ActionListener, PropertyChangeListen
         			StringBuilder output = new StringBuilder();
         			BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
         			String line;
-        			while(	(line=reader.readLine()) != null	) {
-        				output.append(line+"\n");
-        			}
+        			line = reader.readLine();
+        			//while(	(line=reader.readLine()) != null	) {
+        			//	output.append(line+"\n");
+        			//}
         			int exitVal = process.waitFor();
         			if(exitVal == 0) {
         				System.out.println("SUCCESS");
         				progress += 1;
+        				myLine = line;
         			} else {
         				System.out.println("FAILED");
         			}
@@ -117,7 +121,7 @@ public class Main extends JPanel implements ActionListener, PropertyChangeListen
             int progress = (Integer) evt.getNewValue();
             progressBar.setValue(progress);
             taskOutput.append(String.format(
-                    "Completed %d%% of task.\n", task.getProgress()));
+                    "Completed %d%% of task.%s\n", task.getProgress(), myLine));
         } 
     } 
 	
