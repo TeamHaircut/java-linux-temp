@@ -7,6 +7,7 @@ import java.io.IOException;
 public class Main {
 
 	public static void main(String[] args) {
+		//temp
 		ProcessBuilder processBuilder = new ProcessBuilder();
 		processBuilder.command("bash", "-c", "sh /root/Desktop/scriptA.sh");
 		try {
