@@ -14,7 +14,7 @@ public class Main extends JPanel implements ActionListener, PropertyChangeListen
     private JButton startButton;
     private JTextArea taskOutput;
     private Task task;
-    String myLine = "start";
+    //String myLine = "start";
     
     class Task extends SwingWorker<Void, Void> {
         /*
@@ -27,6 +27,32 @@ public class Main extends JPanel implements ActionListener, PropertyChangeListen
             
             //Initialize progress property.
             setProgress(0);
+            
+            /////////////////////////////////////////////////////////////////////////////////////////////////
+    		ProcessBuilder processBuilder = new ProcessBuilder();
+    		processBuilder.command("bash", "-c", "sh /root/Desktop/scriptA.sh");
+    		try {
+    			Process process = processBuilder.start();
+    			StringBuilder output = new StringBuilder();
+    			BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+    			String line;
+    			//line = reader.readLine();
+    			while(	(line=reader.readLine()) != null	) {
+    				output.append(line+"\n");
+    			}
+//    			int exitVal = process.waitFor();
+//    			if(exitVal == 0) {
+//    				System.out.println("SUCCESS");
+//    				progress += 1;
+//    				//myLine = line;
+//    			} else {
+//    				System.out.println("FAILED");
+//    			}
+    		} catch (Exception e) {
+    			e.printStackTrace();
+    		}
+    		///////////////////////////////////////////////////////////////////////////////////////////////////
+            
 
             while (progress < 100) {
                 //Sleep for up to one second.
@@ -34,31 +60,8 @@ public class Main extends JPanel implements ActionListener, PropertyChangeListen
                     Thread.sleep(random.nextInt(1000));
                 } catch (InterruptedException ignore) {}
                 //Make random progress.
-                /////////////////////////////////////////////////////////////////////////////////////////////////
-        		ProcessBuilder processBuilder = new ProcessBuilder();
-        		processBuilder.command("bash", "-c", "sh /root/Desktop/scriptA.sh");
-        		try {
-        			Process process = processBuilder.start();
-        			StringBuilder output = new StringBuilder();
-        			BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-        			String line;
-        			line = reader.readLine();
-        			//while(	(line=reader.readLine()) != null	) {
-        			//	output.append(line+"\n");
-        			//}
-        			int exitVal = process.waitFor();
-        			if(exitVal == 0) {
-        				System.out.println("SUCCESS");
-        				progress += 1;
-        				myLine = line;
-        			} else {
-        				System.out.println("FAILED");
-        			}
-        		} catch (Exception e) {
-        			e.printStackTrace();
-        		}
-        		///////////////////////////////////////////////////////////////////////////////////////////////////
-                //progress += random.nextInt(10);
+
+                progress += random.nextInt(10);
                 setProgress(Math.min(progress, 100));
             }
             return null;
@@ -121,7 +124,7 @@ public class Main extends JPanel implements ActionListener, PropertyChangeListen
             int progress = (Integer) evt.getNewValue();
             progressBar.setValue(progress);
             taskOutput.append(String.format(
-                    "Completed %d%% of task.%s\n", task.getProgress(), myLine));
+                    "Completed %d%% of task.\n", task.getProgress()));
         } 
     } 
 	
