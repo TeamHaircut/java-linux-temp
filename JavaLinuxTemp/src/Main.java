@@ -3,6 +3,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.BufferedReader;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.IOException;
 import java.beans.*;
@@ -30,16 +31,22 @@ public class Main extends JPanel implements ActionListener, PropertyChangeListen
             
             /////////////////////////////////////////////////////////////////////////////////////////////////
     		ProcessBuilder processBuilder = new ProcessBuilder();
-    		processBuilder.command("bash", "-c", "sh /root/Desktop/scriptA.sh");
+    		//processBuilder.command("bash", "-c", "sh /root/Desktop/scriptA.sh");
+    		processBuilder.command("java", "-version");
     		try {
     			Process process = processBuilder.start();
-    			StringBuilder output = new StringBuilder();
-    			BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-    			String line;
-    			//line = reader.readLine();
-    			while(	(line=reader.readLine()) != null	) {
-    				output.append(line+"\n");
-    			}
+    	         InputStream in = process.getInputStream();
+    	         for (int i = 0; i < in.available(); i++) {
+    	            System.out.println("" + in.read());
+    	         }
+//    			List<String> results = readOutput(process.getInputStream());
+//    			StringBuilder output = new StringBuilder();
+//    			BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+//    			String line;
+//    			//line = reader.readLine();
+//    			while(	(line=reader.readLine()) != null	) {
+//    				output.append(line+"\n");
+//    			}
 //    			int exitVal = process.waitFor();
 //    			if(exitVal == 0) {
 //    				System.out.println("SUCCESS");
