@@ -1,3 +1,4 @@
+package teamhaircut;
 import javax.swing.*;
 
 import java.awt.*;
