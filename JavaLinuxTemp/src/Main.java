@@ -6,6 +6,8 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.beans.*;
 import java.util.Random;
 
@@ -13,7 +15,7 @@ public class Main extends JPanel implements ActionListener, PropertyChangeListen
 	
     private JProgressBar progressBar;
     private JButton startButton;
-    private JTextArea taskOutput;
+    public static JTextArea taskOutput;
     private Task task;
     //String myLine = "start";
     
@@ -30,15 +32,15 @@ public class Main extends JPanel implements ActionListener, PropertyChangeListen
             setProgress(0);
             
             /////////////////////////////////////////////////////////////////////////////////////////////////
-    		ProcessBuilder processBuilder = new ProcessBuilder();
-    		//processBuilder.command("bash", "-c", "sh /root/Desktop/scriptA.sh");
-    		processBuilder.command("java", "-version");
-    		try {
-    			Process process = processBuilder.start();
-    	         InputStream in = process.getInputStream();
-    	         for (int i = 0; i < in.available(); i++) {
-    	            System.out.println("" + in.read());
-    	         }
+//    		ProcessBuilder processBuilder = new ProcessBuilder();
+//    		//processBuilder.command("bash", "-c", "sh /root/Desktop/scriptA.sh");
+//    		processBuilder.command("java", "-version");
+//    		try {
+//    			Process process = processBuilder.start();
+//    	         InputStream in = process.getInputStream();
+//    	         for (int i = 0; i < in.available(); i++) {
+//    	            System.out.println("" + in.read());
+//    	         }
 //    			List<String> results = readOutput(process.getInputStream());
 //    			StringBuilder output = new StringBuilder();
 //    			BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
@@ -55,9 +57,9 @@ public class Main extends JPanel implements ActionListener, PropertyChangeListen
 //    			} else {
 //    				System.out.println("FAILED");
 //    			}
-    		} catch (Exception e) {
-    			e.printStackTrace();
-    		}
+//    		} catch (Exception e) {
+//    			e.printStackTrace();
+//    		}
     		///////////////////////////////////////////////////////////////////////////////////////////////////
             
 
@@ -151,12 +153,23 @@ public class Main extends JPanel implements ActionListener, PropertyChangeListen
     }
 
 	public static void main(String[] args) {
+		
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 createAndShowGUI();
             }
         });
-
-	}
+ 
+        Path dir = Paths.get("C:/Users/RuthDan/Desktop/test");
+        boolean recursive = false;
+        try {
+			new WatchDir(dir, recursive).processEvents();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+        
+	}//end main
 
 }
