@@ -142,6 +142,7 @@ public class WatchDir {
 
                 // print out event
                 Main.taskOutput.append(child.toString()+"\n");
+                Main.prog++;
                 System.out.format("%s: %s\n", event.kind().name(), child);
 
                 // if directory is created, and watching recursively, then

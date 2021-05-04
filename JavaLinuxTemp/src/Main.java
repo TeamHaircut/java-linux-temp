@@ -13,6 +13,7 @@ import java.util.Random;
 
 public class Main extends JPanel implements ActionListener, PropertyChangeListener{
 	
+	public static int prog = 0;
     private JProgressBar progressBar;
     private JButton startButton;
     public static JTextArea taskOutput;
@@ -27,9 +28,10 @@ public class Main extends JPanel implements ActionListener, PropertyChangeListen
         public Void doInBackground() {
             Random random = new Random();
             int progress = 0;
+            prog = progress;
             
             //Initialize progress property.
-            setProgress(0);
+            setProgress(prog);
             
             /////////////////////////////////////////////////////////////////////////////////////////////////
 //    		ProcessBuilder processBuilder = new ProcessBuilder();
@@ -63,15 +65,15 @@ public class Main extends JPanel implements ActionListener, PropertyChangeListen
     		///////////////////////////////////////////////////////////////////////////////////////////////////
             
 
-            while (progress < 100) {
+            while (prog < 100) {
                 //Sleep for up to one second.
                 try {
                     Thread.sleep(random.nextInt(1000));
                 } catch (InterruptedException ignore) {}
                 //Make random progress.
 
-                progress += random.nextInt(10);
-                setProgress(Math.min(progress, 100));
+                //progress += random.nextInt(10);
+                setProgress(Math.min(prog, 100));
             }
             return null;
         }
