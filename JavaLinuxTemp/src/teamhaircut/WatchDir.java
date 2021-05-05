@@ -31,8 +31,10 @@ package teamhaircut;
  */
 
 import java.nio.file.*;
+
 import static java.nio.file.StandardWatchEventKinds.*;
 import static java.nio.file.LinkOption.*;
+
 import java.nio.file.attribute.*;
 import java.io.*;
 import java.util.*;
@@ -144,7 +146,15 @@ public class WatchDir {
                 // print out event
                 //Main.taskOutput.append(child.toString()+"\n");
                 //Main.prog++;
-                System.out.format("%s: %s\n", event.kind().name(), child);
+/////////////////////////////////EDIT HERE/////////////////////////////////
+                //System.out.format("%s: %s\n", event.kind().name(), child);
+                try {
+					System.out.format("%s: %s\n", event.kind().name(), Files.size(child));
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+///////////////////////////////////////////////////////////////////////////
 
                 // if directory is created, and watching recursively, then
                 // register it and its sub-directories
