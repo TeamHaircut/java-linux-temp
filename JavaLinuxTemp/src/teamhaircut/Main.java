@@ -303,7 +303,7 @@ class WatchDir1 {
 //    							"%s: %s\n", event.kind().name(), Files.size(child))
 //    							);
                 		Main.taskOutput.append(String.format(
-                				"%s: %s\n", event.kind().name(), msg
+                				"%s\n", msg
     							));
                 	}
     					
