@@ -6,6 +6,7 @@ import static java.nio.file.StandardWatchEventKinds.ENTRY_MODIFY;
 import static java.nio.file.StandardWatchEventKinds.OVERFLOW;
 
 import javax.swing.*;
+import javax.swing.text.DefaultCaret;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -123,6 +124,8 @@ public class Main extends JPanel implements ActionListener, PropertyChangeListen
         taskOutput = new JTextArea(10, 30);//5,20
         taskOutput.setMargin(new Insets(5,5,5,5));
         taskOutput.setEditable(false);
+        DefaultCaret caret = (DefaultCaret)taskOutput.getCaret();
+        caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
  
         JPanel panel = new JPanel();
         panel.add(startButton);
