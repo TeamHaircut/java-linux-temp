@@ -269,7 +269,7 @@ class WatchDir1 {
                 WatchEvent<Path> ev = cast(event);
                 Path name = ev.context();
                 Path child = dir.resolve(name);
-                System.out.println(child);
+                //System.out.println(child);
 
                 // print out event
                 //Main.taskOutput.append(child.toString()+"\n");
