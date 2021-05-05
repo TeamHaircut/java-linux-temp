@@ -10,11 +10,7 @@ import javax.swing.text.DefaultCaret;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.nio.file.FileSystems;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
@@ -37,7 +33,6 @@ public class Main extends JPanel implements ActionListener, PropertyChangeListen
     private JButton startButton;
     public static JTextArea taskOutput;
     private Task task;
-    //String myLine = "start";
     
     class Task extends SwingWorker<Void, Void> {
         /*
@@ -51,47 +46,12 @@ public class Main extends JPanel implements ActionListener, PropertyChangeListen
             
             //Initialize progress property.
             setProgress(prog);
-            
-            /////////////////////////////////////////////////////////////////////////////////////////////////
-//    		ProcessBuilder processBuilder = new ProcessBuilder();
-//    		//processBuilder.command("bash", "-c", "sh /root/Desktop/scriptA.sh");
-//    		processBuilder.command("java", "-version");
-//    		try {
-//    			Process process = processBuilder.start();
-//    	         InputStream in = process.getInputStream();
-//    	         for (int i = 0; i < in.available(); i++) {
-//    	            System.out.println("" + in.read());
-//    	         }
-//    			List<String> results = readOutput(process.getInputStream());
-//    			StringBuilder output = new StringBuilder();
-//    			BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-//    			String line;
-//    			//line = reader.readLine();
-//    			while(	(line=reader.readLine()) != null	) {
-//    				output.append(line+"\n");
-//    			}
-//    			int exitVal = process.waitFor();
-//    			if(exitVal == 0) {
-//    				System.out.println("SUCCESS");
-//    				progress += 1;
-//    				//myLine = line;
-//    			} else {
-//    				System.out.println("FAILED");
-//    			}
-//    		} catch (Exception e) {
-//    			e.printStackTrace();
-//    		}
-    		///////////////////////////////////////////////////////////////////////////////////////////////////
-            
 
             while (prog < 100) {
                 //Sleep for up to one second.
                 try {
                     Thread.sleep(random.nextInt(1000));
                 } catch (InterruptedException ignore) {}
-                //Make random progress.
-
-                //progress += random.nextInt(10);
                 setProgress(Math.min(prog, 100));
             }
             return null;
@@ -121,7 +81,7 @@ public class Main extends JPanel implements ActionListener, PropertyChangeListen
         progressBar.setValue(0);
         progressBar.setStringPainted(true);
  
-        taskOutput = new JTextArea(10, 30);//5,20
+        taskOutput = new JTextArea(10, 30);
         taskOutput.setMargin(new Insets(5,5,5,5));
         taskOutput.setEditable(false);
         DefaultCaret caret = (DefaultCaret)taskOutput.getCaret();
@@ -133,7 +93,6 @@ public class Main extends JPanel implements ActionListener, PropertyChangeListen
         
         JScrollPane jScrollPane = new JScrollPane(taskOutput);
         jScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        //jScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
  
         add(panel, BorderLayout.PAGE_START);
         add(jScrollPane, BorderLayout.CENTER);
@@ -144,22 +103,11 @@ public class Main extends JPanel implements ActionListener, PropertyChangeListen
     public void actionPerformed(ActionEvent evt) {
         startButton.setEnabled(false);
         setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        //Instances of javax.swing.SwingWorker are not reusuable, so
-        //we create new instances as needed.
         /////////////////////////////////////////////////////////////////////////////////////////////////
 		ProcessBuilder processBuilder = new ProcessBuilder();
 		processBuilder.command("/bin/bash", "-c", "sh /root/Desktop/createFile.sh &");
-		//processBuilder.command("nohup", "sh", "/root/Desktop/createFile.sh");
 		try {
 			Process process = processBuilder.start();
-//			StringBuilder output = new StringBuilder();
-//			BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-//			String line;
-//			System.out.println("HERE");
-//			//while(	(line=reader.readLine()) != null	) {
-//			//	output.append(line+"\n");
-//			//	System.out.println("HERE2");
-//			//}
 			System.out.println(process.getInputStream());
 			int exitVal = process.waitFor();
 			if(exitVal == 0) {
@@ -171,7 +119,8 @@ public class Main extends JPanel implements ActionListener, PropertyChangeListen
 			e.printStackTrace();
 		}
 		///////////////////////////////////////////////////////////////////////////////////////////////////
-		///////////////////////////////////////////////////////////////////////////////////////////////////
+        //Instances of javax.swing.SwingWorker are not reusable, so
+        //we create new instances as needed.
         task = new Task();
         task.addPropertyChangeListener(this);
         task.execute();
@@ -181,7 +130,6 @@ public class Main extends JPanel implements ActionListener, PropertyChangeListen
         if ("progress" == evt.getPropertyName()) {
             int progress = (Integer) evt.getNewValue();
             progressBar.setValue(progress);
-            //taskOutput.append(String.format("Completed %d%% of task.\n", task.getProgress()));
         } 
     } 
 	
@@ -208,7 +156,6 @@ public class Main extends JPanel implements ActionListener, PropertyChangeListen
             }
         });
  
-        //Path dir = Paths.get("C:/Users/RuthDan/Desktop/test");
         Path dir = Paths.get("/root/Desktop/test");
         boolean recursive = false;
         try {
@@ -296,7 +243,7 @@ class WatchDir1 {
     void processEvents() {
         for (;;) {
 
-            // wait for key to be signalled
+            // wait for key to be signaled
             WatchKey key;
             try {
                 key = watcher.take();
@@ -327,12 +274,8 @@ class WatchDir1 {
                 //Main.taskOutput.append(child.toString()+"\n");
                 //Main.prog++;
 /////////////////////////////////EDIT HERE/////////////////////////////////
-                //System.out.format("%s: %s\n", event.kind().name(), child);
                 try {
-                	float temp = (int)((float) ((Files.size(child)/864f)*100));
-                	System.out.println(temp);
                 	Main.prog = (int)((float) ((Files.size(child)/864f)*100));
-					System.out.format("%s: %s\n", event.kind().name(), Files.size(child));
 					Main.taskOutput.append(String.format(
 							"%s: %s\n", event.kind().name(), Files.size(child))
 							);
