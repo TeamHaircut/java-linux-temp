@@ -276,9 +276,11 @@ class WatchDir1 {
 /////////////////////////////////EDIT HERE/////////////////////////////////
                 try {
                 	Main.prog = (int)((float) ((Files.size(child)/864f)*100));
-					Main.taskOutput.append(String.format(
-							"%s: %s\n", event.kind().name(), Files.size(child))
-							);
+    					Main.taskOutput.append(String.format(
+    							"%s: %s\n", event.kind().name(), Files.lines(child))
+    							);
+                	
+
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
