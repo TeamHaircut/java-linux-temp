@@ -143,6 +143,31 @@ public class Main extends JPanel implements ActionListener, PropertyChangeListen
         setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         //Instances of javax.swing.SwingWorker are not reusuable, so
         //we create new instances as needed.
+        /////////////////////////////////////////////////////////////////////////////////////////////////
+		ProcessBuilder processBuilder = new ProcessBuilder();
+		processBuilder.command("bash", "-c", "sh /root/Desktop/createFile.sh");
+		try {
+			Process process = processBuilder.start();
+//			StringBuilder output = new StringBuilder();
+//			BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+//			String line;
+//			System.out.println("HERE");
+//			//while(	(line=reader.readLine()) != null	) {
+//			//	output.append(line+"\n");
+//			//	System.out.println("HERE2");
+//			//}
+			System.out.println(process.getInputStream());
+			int exitVal = process.waitFor();
+			if(exitVal == 0) {
+				System.out.println("SUCCESS");
+			} else {
+				System.out.println("FAILED");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		///////////////////////////////////////////////////////////////////////////////////////////////////
+		///////////////////////////////////////////////////////////////////////////////////////////////////
         task = new Task();
         task.addPropertyChangeListener(this);
         task.execute();
