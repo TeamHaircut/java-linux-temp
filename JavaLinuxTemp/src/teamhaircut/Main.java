@@ -11,7 +11,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.beans.*;
 import java.util.Random;
-import WatchDir;
 
 public class Main extends JPanel implements ActionListener, PropertyChangeListener{
 	
