@@ -163,14 +163,14 @@ public class Main extends JPanel implements ActionListener, PropertyChangeListen
             }
         });
  
-        Path dir = Paths.get("C:/Users/RuthDan/Desktop/test");
-        boolean recursive = false;
-        try {
-			new WatchDir(dir, recursive).processEvents();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//        Path dir = Paths.get("C:/Users/RuthDan/Desktop/test");
+//        boolean recursive = false;
+//        try {
+//			new WatchDir(dir, recursive).processEvents();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
         
         
 	}//end main
