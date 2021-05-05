@@ -301,6 +301,7 @@ class WatchDir1 {
                 //System.out.format("%s: %s\n", event.kind().name(), child);
                 try {
                 	Main.prog = (int) (Files.size(child)/864);
+                	System.out.println(Main.prog);
 					System.out.format("%s: %s\n", event.kind().name(), Files.size(child));
 					Main.taskOutput.append(String.format(
 							"%s: %s\n", event.kind().name(), Files.size(child))
