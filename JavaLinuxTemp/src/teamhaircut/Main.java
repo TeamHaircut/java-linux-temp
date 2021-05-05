@@ -65,7 +65,7 @@ public class Main extends JPanel implements ActionListener, PropertyChangeListen
             Toolkit.getDefaultToolkit().beep();
             startButton.setEnabled(true);
             setCursor(null); //turn off the wait cursor
-            taskOutput.append("Done!\n");
+            //taskOutput.append("Done!\n");
         }
     }
 	
@@ -283,7 +283,7 @@ class WatchDir1 {
                 		String msg = "";
                 		switch((int)Files.size(child)) {
                 		  case 2:
-                			  msg = "Installation log can be found at /var/log/update\nInstalling software now";
+                			  msg = "Installation log can be found at /var/log/update\nInitializing update";
                 		    break;
                 		  case 4:
                 			  msg = "Backing up old data";
@@ -292,10 +292,10 @@ class WatchDir1 {
                   			msg = "Copying new data to system";
                   		    break;
                 		  case 8:
-                			  msg = "Update is complete";
+                			  msg = "Software update is complete";
                   		    break;
                   		  case 10:
-                  			msg = "Restart computer now";
+                  			msg = "Please restart your computer";
                   		    break;
                 		  default:
                 		    // code block
