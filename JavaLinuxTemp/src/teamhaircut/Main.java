@@ -11,7 +11,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.beans.*;
 import java.util.Random;
-import teamhaircut.WatchDir;
 
 public class Main extends JPanel implements ActionListener, PropertyChangeListener{
 	
@@ -168,7 +167,7 @@ public class Main extends JPanel implements ActionListener, PropertyChangeListen
         Path dir = Paths.get("/root/Desktop/test");
         boolean recursive = false;
         try {
-			new teamhaircut.WatchDir(dir, recursive).processEvents();
+			new WatchDir(dir, recursive).processEvents();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
