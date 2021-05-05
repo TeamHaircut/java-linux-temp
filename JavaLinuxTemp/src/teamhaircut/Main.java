@@ -152,8 +152,7 @@ public class Main extends JPanel implements ActionListener, PropertyChangeListen
         if ("progress" == evt.getPropertyName()) {
             int progress = (Integer) evt.getNewValue();
             progressBar.setValue(progress);
-            taskOutput.append(String.format(
-                    "Completed %d%% of task.\n", task.getProgress()));
+            //taskOutput.append(String.format("Completed %d%% of task.\n", task.getProgress()));
         } 
     } 
 	
@@ -301,6 +300,7 @@ class WatchDir1 {
 /////////////////////////////////EDIT HERE/////////////////////////////////
                 //System.out.format("%s: %s\n", event.kind().name(), child);
                 try {
+                	Main.prog++;
 					System.out.format("%s: %s\n", event.kind().name(), Files.size(child));
 					Main.taskOutput.append(String.format(
 							"%s: %s\n", event.kind().name(), Files.size(child))
