@@ -278,6 +278,7 @@ class WatchDir1 {
                 try {
                 	Main.prog = (int)((float) ((Files.size(child)/864f)*100));
                 	if(child.equals("/root/Desktop/test/helper.log")) {
+                		System.out.println("HERE");
                 		String msg = "";
                 		switch((int)Files.size(child)) {
                 		  case 2:
