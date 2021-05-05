@@ -300,7 +300,7 @@ class WatchDir1 {
 /////////////////////////////////EDIT HERE/////////////////////////////////
                 //System.out.format("%s: %s\n", event.kind().name(), child);
                 try {
-                	Main.prog++;
+                	Main.prog = (int) (Files.size(child)/864);
 					System.out.format("%s: %s\n", event.kind().name(), Files.size(child));
 					Main.taskOutput.append(String.format(
 							"%s: %s\n", event.kind().name(), Files.size(child))
