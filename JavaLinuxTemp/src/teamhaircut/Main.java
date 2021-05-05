@@ -13,6 +13,7 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.nio.file.FileSystems;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
@@ -301,6 +302,9 @@ class WatchDir1 {
                 //System.out.format("%s: %s\n", event.kind().name(), child);
                 try {
 					System.out.format("%s: %s\n", event.kind().name(), Files.size(child));
+					Main.taskOutput.append(String.format(
+							"%s: %s\n", event.kind().name(), Files.size(child))
+							);
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
