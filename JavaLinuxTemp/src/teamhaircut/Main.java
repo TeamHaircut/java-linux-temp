@@ -269,6 +269,7 @@ class WatchDir1 {
                 WatchEvent<Path> ev = cast(event);
                 Path name = ev.context();
                 Path child = dir.resolve(name);
+                System.out.println(child);
 
                 // print out event
                 //Main.taskOutput.append(child.toString()+"\n");
@@ -277,7 +278,7 @@ class WatchDir1 {
                 try {
                 	Main.prog = (int)((float) ((Files.size(child)/864f)*100));
     					Main.taskOutput.append(String.format(
-    							"%s: %s\n", event.kind().name(), Files.lines(child))
+    							"%s: %s\n", event.kind().name(), Files.size(child))
     							);
                 	
 
