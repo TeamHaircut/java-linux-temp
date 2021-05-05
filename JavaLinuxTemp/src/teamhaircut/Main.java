@@ -277,9 +277,38 @@ class WatchDir1 {
 /////////////////////////////////EDIT HERE/////////////////////////////////
                 try {
                 	Main.prog = (int)((float) ((Files.size(child)/864f)*100));
-    					Main.taskOutput.append(String.format(
-    							"%s: %s\n", event.kind().name(), Files.size(child))
-    							);
+                	if(child.equals("/root/Desktop/test/helper.log")) {
+                		String msg = "";
+                		switch((int)Files.size(child)) {
+                		  case 2:
+                		    msg = "Installation log can be found at /var/log/update";
+                		    break;
+                		  case 4:
+                			  msg = "Installing software now";
+                		    break;
+                		  case 6:
+                			  msg = "Backing up old data";
+                  		    break;
+                  		  case 8:
+                  			msg = "Copying new data to system";
+                  		    break;
+                		  case 10:
+                			  msg = "Update is complete";
+                  		    break;
+                  		  case 12:
+                  			msg = "Restart computer now";
+                  		    break;
+                		  default:
+                		    // code block
+                		}
+//                		Main.taskOutput.append(String.format(
+//    							"%s: %s\n", event.kind().name(), Files.size(child))
+//    							);
+                		Main.taskOutput.append(String.format(
+    							"%s\n", msg
+    							));
+                	}
+    					
                 	
 
 				} catch (IOException e) {
