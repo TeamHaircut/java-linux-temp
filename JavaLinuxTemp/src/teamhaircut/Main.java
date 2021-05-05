@@ -281,11 +281,8 @@ class WatchDir1 {
                 		System.out.println("HERE");
                 		String msg = "";
                 		switch((int)Files.size(child)) {
-                		  case 0:
-                		    msg = "Installation log can be found at /var/log/update";
-                		    break;
                 		  case 2:
-                			  msg = "Installing software now";
+                			  msg = "Installation log can be found at /var/log/update\nInstalling software now";
                 		    break;
                 		  case 4:
                 			  msg = "Backing up old data";
