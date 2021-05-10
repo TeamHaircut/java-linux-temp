@@ -104,7 +104,9 @@ public class Main extends JPanel implements ActionListener, PropertyChangeListen
         setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         /////////////////////////////////////////////////////////////////////////////////////////////////
 		ProcessBuilder processBuilder = new ProcessBuilder();
-		processBuilder.command("/bin/bash", "-c", "sh /root/Desktop/createFile.sh &");
+		//processBuilder.command("/bin/bash", "-c", "sh /root/Desktop/createFile.sh &");
+		processBuilder.command("/bin/bash", "-c", "sh /root/Desktop/install.sh &");
+		//processBuilder.command("/bin/bash", "-c", "sh /media/CDROM/install.sh &");
 		try {
 			Process process = processBuilder.start();
 			System.out.println(process.getInputStream());
