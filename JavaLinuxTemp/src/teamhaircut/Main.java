@@ -278,7 +278,7 @@ class WatchDir1 {
 /////////////////////////////////EDIT HERE/////////////////////////////////
                 try {
                 	if(child.toString().equals("/root/Desktop/test/output.log")) {
-                		Main.prog = (int)((float) ((Files.size(child)/864f)*100));
+                		Main.prog = (int)((float) ((Files.size(child)/816f)*100));
                 	}
                 	if(child.toString().equals("/root/Desktop/test/helper.log") && event.kind().name().equals(ENTRY_MODIFY.toString())) {
                 		String msg = "";
