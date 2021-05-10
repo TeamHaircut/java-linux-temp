@@ -105,7 +105,7 @@ public class Main extends JPanel implements ActionListener, PropertyChangeListen
         /////////////////////////////////////////////////////////////////////////////////////////////////
 		ProcessBuilder processBuilder = new ProcessBuilder();
 		//processBuilder.command("/bin/bash", "-c", "sh /root/Desktop/createFile.sh &");
-		processBuilder.command("/bin/bash", "-c", "sh /root/Desktop/shares/isoDev/install.sh &");
+		processBuilder.command("/bin/bash", "-c", "sh /root/Desktop/share/dev/isoDev/install.sh &");
 		//processBuilder.command("/bin/bash", "-c", "sh /media/CDROM/install.sh &");
 		try {
 			Process process = processBuilder.start();
