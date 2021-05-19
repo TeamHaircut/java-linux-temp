@@ -30,7 +30,7 @@ public class Main extends JPanel implements ActionListener, PropertyChangeListen
 	public static int prog = 0;
     private JProgressBar progressBar;
     private JButton startButton;
-    public static JTextArea taskOutput;
+    //public static JTextArea taskOutput;
     private Task task;
     
     class Task extends SwingWorker<Void, Void> {
@@ -80,21 +80,21 @@ public class Main extends JPanel implements ActionListener, PropertyChangeListen
         progressBar.setValue(0);
         progressBar.setStringPainted(true);
  
-        taskOutput = new JTextArea(10, 30);
-        taskOutput.setMargin(new Insets(5,5,5,5));
-        taskOutput.setEditable(false);
-        DefaultCaret caret = (DefaultCaret)taskOutput.getCaret();
-        caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
+        //taskOutput = new JTextArea(10, 30);
+        //taskOutput.setMargin(new Insets(5,5,5,5));
+        //taskOutput.setEditable(false);
+        //DefaultCaret caret = (DefaultCaret)taskOutput.getCaret();
+        //caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
  
         JPanel panel = new JPanel();
         panel.add(startButton);
         panel.add(progressBar);
         
-        JScrollPane jScrollPane = new JScrollPane(taskOutput);
-        jScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        //JScrollPane jScrollPane = new JScrollPane(taskOutput);
+        //jScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
  
         add(panel, BorderLayout.PAGE_START);
-        add(jScrollPane, BorderLayout.CENTER);
+        //add(jScrollPane, BorderLayout.CENTER);
         setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
  
     }
@@ -304,9 +304,9 @@ class WatchDir1 {
 //                		Main.taskOutput.append(String.format(
 //    							"%s: %s\n", event.kind().name(), Files.size(child))
 //    							);
-                		Main.taskOutput.append(String.format(
-                				"%s\n", msg
-    							));
+//                		Main.taskOutput.append(String.format(
+//                				"%s\n", msg
+//    							));
                 	}
     					
                 	
